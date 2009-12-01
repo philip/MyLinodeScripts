@@ -1,0 +1,16 @@
+Introduction:
+
+These are files I personally use to manage my domains and services on a Linode VPS.
+
+I put effort into making them moderately generic enough to work for others, but have
+not tested them in other environments. I use:
+
+- PHP 5.3, with the php-fpm patch
+- NGINX web server
+- Ubuntu 9.10
+
+Warning:
+
+I classify myself as a poor system administrator but am learning this task as I now
+spend time managing my own VPS. So, because of this, my scripts cannot guarantee
+themselves as being #1 awesome.... You've been warned.

@@ -9,11 +9,12 @@
 	- Better deal with chmod/chown
 	- Determine if the ngnix configuration should be improved
 	- Consider handling add_www automagically (bar.com yes vs foo.bar.com no)
+	- Consider handling all forms of configuration, from ports, init.d, etc.
 
 	Notes:
 	- The hostname becomes a directory name within root_www
 	- Assumes /etc/nginx/fastcgi_params exists with various CGI variable definitions
-	- See the definition for other assumptions that are made, like port 9000
+	- See the definition for other assumptions that are made, like port 9000, 'nginx restart' location, ...
 */
 
 // Should a www.* variant be added?
@@ -61,17 +62,17 @@ if (is_dir($doc_path)) {
 
 file_put_contents(ROOT_CONF . '/' . HOSTNAME, $conf);
 
-if (!mkdir ($root_path)) {
+if (!mkdir($root_path)) {
 	echo "ERROR: Unable to create hostname root ($root_path) directory\n";
 	exit;
 }
-if (!mkdir ($doc_path)) {
+if (!mkdir($doc_path)) {
 	echo "ERROR: Unable to create hostname doc ($doc_path) directory\n";
 	exit;
 }
 
-shell_exec("chmod ug+rwx " . $root_path);
-shell_exec("chmod ug+rwx " . $doc_path);
+shell_exec('chmod ug+rwx ' . $root_path);
+shell_exec('chmod ug+rwx ' . $doc_path);
 
 // Add few files to begin with
 if (ADD_SKELS) {
@@ -82,7 +83,7 @@ if (ADD_SKELS) {
 }
 
 if (RESTART_WWW) {
-	shell_exec("/etc/init.d/nginx restart");
+	shell_exec('/etc/init.d/nginx restart');
 }
 
 echo "\nINFO: Finished with apparent success.\n";
